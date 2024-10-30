@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: abdullahdaniyal1234/auth-service:latest
+          ports:
+            - containerPort: 5001
+          env:
+            - name: MONGO_URI
+              value: "mongodb://mongo-service:27017/authservice"
